@@ -7,11 +7,11 @@ Lynk is a Python framework for quantitative wagering. It takes the most reusable
 - **Leakage-safe validation and honest backtests.** Date splits, walk-forward windows, an assertion that fails when a feature arrives after the decision time, pre-registered strategy selection and results with day-block bootstrap confidence intervals.
 - **A horse racing module** with handicapping features, discounted Harville finish-order models, win / place / show / exacta bets and a synthetic racing circuit, so every example runs without any proprietary data.
 
-The research write-ups live at **[cbhuston.github.io/lynk](https://cbhuston.github.io/lynk/)**:
+The research write-ups live at **[cbhuston.github.io](https://cbhuston.github.io/)**:
 
-1. [Handicapping Without the Tote](https://cbhuston.github.io/lynk/reports/fundamental-model.html): what drives a fundamental horse racing model.
-2. [Sizing the Bet](https://cbhuston.github.io/lynk/reports/bet-sizing.html): from the Kelly criterion to a pari-mutuel portfolio solver.
-3. [The Lynk Framework](https://cbhuston.github.io/lynk/code/lynk-framework.html): design, architecture and a walkthrough of this package.
+1. [Handicapping Without the Tote](https://cbhuston.github.io/reports/fundamental-model.html): what drives a fundamental horse racing model.
+2. [Sizing the Bet](https://cbhuston.github.io/reports/bet-sizing.html): from the Kelly criterion to a pari-mutuel portfolio solver.
+3. [The Lynk Framework](https://cbhuston.github.io/code/lynk-framework.html): design, architecture and a walkthrough of this package.
 
 ## Install
 
@@ -49,8 +49,8 @@ src/lynk/
                    backtest, validation, metrics
   horse_racing/    schema, features, finish_order, bets, synthetic
 examples/          quickstart.py
+examples/figures/  scripts that make the bet sizing and framework figures for the research site
 tests/             unit tests for the math and the leakage guards
-site/              the Quarto research site (published to GitHub Pages with quarto publish gh-pages)
 ```
 
 ## Tests

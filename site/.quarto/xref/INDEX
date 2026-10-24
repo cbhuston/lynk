@@ -1,0 +1,23 @@
+{
+  "index.qmd": {
+    "index.html": "99d5da6d"
+  },
+  "reports/bet-sizing.qmd": {
+    "bet-sizing.html": "1e9cdd7b"
+  },
+  "reports/fundamental-model.qmd": {
+    "fundamental-model.html": "429293dd"
+  },
+  "reports/lynk-framework.qmd": {
+    "lynk-framework.html": "6128cb5e"
+  },
+  "code/lynk-framework.qmd": {
+    "lynk-framework.html": "92c09783"
+  },
+  "reports/multiclass.qmd": {
+    "multiclass.html": "4ee09721"
+  },
+  "code/lynk-lab.qmd": {
+    "lynk-lab.html": "2d9e63f6"
+  }
+}

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cooper Huston">
+<meta name="dcterms.date" content="2026-10-24">
+
+<title>Lynk Lab – Cooper Huston</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-39031da8c9221abc7aa2805461388dbf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Cooper Huston</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-research" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Research</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-research">    
+        <li>
+    <a class="dropdown-item" href="../reports/fundamental-model.html">
+ <span class="dropdown-text">Handicapping Without the Tote</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reports/multiclass.html">
+ <span class="dropdown-text">One Race, One Winner</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../reports/bet-sizing.html">
+ <span class="dropdown-text">Sizing the Bet</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-code" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Code</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-code">    
+        <li>
+    <a class="dropdown-item" href="../code/lynk-lab.html">
+ <span class="dropdown-text">Lynk Lab: 2025 Kentucky Derby AI analyst</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../code/lynk-framework.html">
+ <span class="dropdown-text">Lynk: quant wagering framework</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/cbhuston/lynk">
+ <span class="dropdown-text">Lynk on GitHub</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cbhuston"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem" id="toc-problem" class="nav-link active" data-scroll-target="#problem">Problem</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a>
+  <ul class="collapse">
+  <li><a href="#everything-runs-in-the-browser" id="toc-everything-runs-in-the-browser" class="nav-link" data-scroll-target="#everything-runs-in-the-browser">Everything runs in the browser</a></li>
+  <li><a href="#three-tiers-spend-tokens-only-when-they-buy-something" id="toc-three-tiers-spend-tokens-only-when-they-buy-something" class="nav-link" data-scroll-target="#three-tiers-spend-tokens-only-when-they-buy-something">Three tiers: spend tokens only when they buy something</a></li>
+  <li><a href="#why-it-uses-so-few-tokens" id="toc-why-it-uses-so-few-tokens" class="nav-link" data-scroll-target="#why-it-uses-so-few-tokens">Why it uses so few tokens</a></li>
+  <li><a href="#suggestions-that-do-not-always-pick-the-favorite" id="toc-suggestions-that-do-not-always-pick-the-favorite" class="nav-link" data-scroll-target="#suggestions-that-do-not-always-pick-the-favorite">Suggestions that do not always pick the favorite</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s next</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lynk Lab</h1>
+<p class="subtitle lead">An AI racing analyst for the 2025 Kentucky Derby that runs entirely in your browser</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cooper Huston </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a class="btn btn-primary" href="../lab/index.html" target="_blank">Open Lynk Lab full screen</a></p>
+<iframe src="../lab/index.html" style="width:100%; height:880px; border:1px solid #e7e6e1; border-radius:10px;" title="Lynk Lab demo" loading="lazy"></iframe>
+<section id="problem" class="level2">
+<h2 class="anchored" data-anchor-id="problem">Problem</h2>
+<p>Lynk Lab started as a product at Lynk: a web app where a horseplayer could open a race, click on any horse, jockey or trainer, and ask questions in plain English. Behind it sat a cloud database with every race since 2012, a set of stored procedures and a chain of hosted language model calls that turned questions into SQL and SQL results into answers.</p>
+<p>It worked, and it was accurate. However, it was expensive to run and impossible to share. Every question went through a login, a cloud function, a hosted model and a database, and the 2025 Kentucky Derby version sent roughly 175,000 characters of statistics (about 44,000 tokens) to the model with every single question before deciding whether it needed to query the database at all.</p>
+<p><strong>Problem statement:</strong> rebuild Lynk Lab so anyone can use it on a static web page, with no server, no login and no API key, while keeping the accuracy of the original and making each question cost a small fraction of the tokens.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p><strong>Source:</strong> the Daily Racing Form result charts behind the rest of my research, for one race: the 2025 Kentucky Derby at Churchill Downs (May 3, 2025, 1 1/4 miles on a sloppy track, $5,000,000, Grade 1).</p>
+<p>The demo ships six small tables, about 10 MB in total:</p>
+<div id="tbl-lab-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-lab-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: The Lynk Lab dataset.
+</figcaption>
+<div aria-describedby="tbl-lab-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Rows</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>field</code></td>
+<td>21</td>
+<td>Every entry, including the two scratches: post position, starting gate, pedigree, owner, breeder, jockey, trainer, morning line, final odds, finish, running positions, speed figure, trip comment, payoffs and the AI win probability</td>
+</tr>
+<tr class="even">
+<td><code>past_performances</code></td>
+<td>114</td>
+<td>Every earlier start of the Derby horses, with the race name, grade, conditions, finish, figure, odds, jockey, trip comment and who won the race</td>
+</tr>
+<tr class="odd">
+<td><code>starts</code></td>
+<td>273,455</td>
+<td>Every start since 2012 by the Derby horses, jockeys and trainers, through the day before the Derby, with odds and payoffs so return on investment can be computed</td>
+</tr>
+<tr class="even">
+<td><code>derby_history</code></td>
+<td>247</td>
+<td>Every Kentucky Derby runner from 2012 to 2024</td>
+</tr>
+<tr class="odd">
+<td><code>race</code> and <code>exotic_payoffs</code></td>
+<td>1 and 32</td>
+<td>The race itself and its official exotic payoffs</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>For reference, the <code>starts</code> table alone is more than a quarter of a million rides and saddlings, so a question like “what does a $2 win bet on every Irad Ortiz Jr.&nbsp;ride for Steve Asmussen return?” is answered from 366 real races, not from a summary.</p>
+<p><strong>The AI predictions</strong> are the Lynk fundamental model’s win probabilities for this race, described in <a href="../reports/fundamental-model.html">Handicapping Without the Tote</a>. The model uses no betting odds and was trained only on races before 2025, so its view of the Derby is a genuine pre-race opinion. It liked Journalism most (16.3%) and had the eventual winner, Sovereignty, fourth at 8.4%.</p>
+</section>
+<section id="approach" class="level2">
+<h2 class="anchored" data-anchor-id="approach">Approach</h2>
+<section id="everything-runs-in-the-browser" class="level3">
+<h3 class="anchored" data-anchor-id="everything-runs-in-the-browser">Everything runs in the browser</h3>
+<p>The analogy that comes to mind is moving a full stack application into the client. The two server pieces of the original app each have a browser equivalent:</p>
+<ul>
+<li><strong>The database becomes DuckDB-WASM.</strong> DuckDB is an analytical SQL engine, and its WebAssembly build runs inside the page. The tables above are downloaded once as Parquet files and every query, from a simple lookup to window functions over 273,455 rows, runs locally in milliseconds.</li>
+<li><strong>The hosted model becomes WebLLM.</strong> WebLLM runs a small open model (Qwen 2.5 with 1.5 or 3 billion parameters) on the visitor’s own graphics card through WebGPU. The first load downloads 1 to 2 GB of model weights into the browser’s cache. After that it starts in seconds and nothing leaves the machine.</li>
+</ul>
+<p>There is no API key anywhere in the page, and nobody pays per question.</p>
+</section>
+<section id="three-tiers-spend-tokens-only-when-they-buy-something" class="level3">
+<h3 class="anchored" data-anchor-id="three-tiers-spend-tokens-only-when-they-buy-something">Three tiers: spend tokens only when they buy something</h3>
+<p>The original app sent everything to the model and let it figure out what to do. Lynk Lab does the reverse: it tries the cheapest correct path first and only involves the model when it adds value.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Q[Question] --&gt; R{Tier 0 keyword router}
+  R -- matches a tool --&gt; T[Tested SQL tool]
+  R -- no match --&gt; L1{Tier 1 model picks a tool}
+  L1 -- tool --&gt; T
+  L1 -- no tool fits --&gt; L2[Tier 2 model writes SQL]
+  L2 --&gt; V[Validate: read-only, one SELECT, LIMIT 100]
+  V -- error --&gt; L2
+  V --&gt; D[(DuckDB in the browser)]
+  T --&gt; D
+  D --&gt; A[Model writes the answer from the returned rows only]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ol type="1">
+<li><strong>Tier 0, the router (zero tokens).</strong> Most questions people ask about a race are predictable: tell me about this horse, compare two horses, how does this jockey do in Grade 1 races, who has early speed, who changed riders. A keyword router recognizes these, resolves the horse, jockey and trainer names, and sends them straight to one of 14 tested SQL tools. The tools are ported from the original Lynk Lab queries (past performances, jockey and trainer records, the last-30-starts ROI, first-time riders, past Derby results) plus new ones such as the pace map and the AI value table.</li>
+<li><strong>Tier 1, tool choice.</strong> When the router does not recognize a question, the model sees a one-line description of each tool and the names in the race, and replies with a tiny JSON object naming the tool and its arguments.</li>
+<li><strong>Tier 2, text to SQL.</strong> When no tool fits (“which Derby trainers have won the most graded stakes since 2023?”), the model writes a SQL query from a verbose data dictionary: every column with its type, a plain-English description, its units and its real allowed values (the actual track conditions, race types, grades and track codes are read from the data when the page loads). It also gets five worked examples, including one that shows how to decline a question. The query is checked before it runs: one statement, read-only, no setting changes, wrapped in a 100-row limit. If DuckDB rejects it, the error goes back to the model for one retry, the same rewrite loop the original cloud function used.</li>
+</ol>
+<p><strong>When the data cannot answer, it says so.</strong> The dictionary ends with an explicit list of what the data does not contain (workouts, veterinary records, results after the Derby, races outside North America and so on). If a question needs any of it, the model must reply <code>NO_DATA</code> with a reason instead of writing SQL, and the app tells the user plainly that it cannot answer. A query that comes back empty gets the same honest message instead of a guess, and the model that writes the final answer is told exactly what the rows represent, so it cannot describe a table of all-surface speed figures as “muddy track” results.</p>
+<p>In every case the final answer is written by the model from <strong>only the rows the query returned</strong>, capped at 15 rows and 12 columns. The model never does arithmetic. Win percentages, returns on investment and averages are computed by SQL, which is why the answers stay as accurate as the original’s.</p>
+</section>
+<section id="why-it-uses-so-few-tokens" class="level3">
+<h3 class="anchored" data-anchor-id="why-it-uses-so-few-tokens">Why it uses so few tokens</h3>
+<div id="tbl-tokens" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tokens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Prompt sizes per step. The app shows the exact token count under every answer.
+</figcaption>
+<div aria-describedby="tbl-tokens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What the model sees</th>
+<th>Approximate prompt size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Original Derby app, every question</td>
+<td>All horse, jockey, trainer and Derby statistics as text</td>
+<td>~174,500 characters, ~44,000 tokens</td>
+</tr>
+<tr class="even">
+<td>Tier 0 router</td>
+<td>Nothing</td>
+<td>0 tokens</td>
+</tr>
+<tr class="odd">
+<td>Tier 1 tool choice</td>
+<td>14 one-line tool descriptions + the names in the race</td>
+<td>~2,100 characters, ~550 tokens</td>
+</tr>
+<tr class="even">
+<td>Tier 2 text to SQL</td>
+<td>Verbose dictionary for only the tables the question needs + real column values + names + 5 examples</td>
+<td>~6,700 characters, ~1,700 tokens (up to ~9,700 / ~2,500 with every table)</td>
+</tr>
+<tr class="odd">
+<td>Answer</td>
+<td>The question + at most 15 result rows</td>
+<td>~1,500 characters, ~400 tokens</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A typical question takes the Tier 0 path and about 400 to 600 tokens in total. The most expensive path (tool choice, SQL with the full dictionary, a retry and the answer) is around 6,000 tokens. In other words, the hardest question in Lynk Lab costs about a seventh of what the easiest question cost in the original, and it runs for free on the visitor’s own hardware.</p>
+<p>Four design choices make that possible:</p>
+<ul>
+<li><strong>A verbose dictionary, but only where it is needed.</strong> The model gets a detailed description of the tables, not their contents, and only for the tables a question touches: a jockey question sends the <code>starts</code> and <code>field</code> descriptions, a question about a horse’s form sends <code>past_performances</code>. Detail is what makes small models write correct SQL, and selecting tables is what keeps that detail affordable. A dictionary costs the same no matter how many rows sit behind it, so the dataset can grow from one race to every race without the prompt growing.</li>
+<li><strong>The database does the math.</strong> Asking a language model to compute a win percentage from 10,000 rides is slow, expensive and error-prone. Asking it to write <code>avg((finish = 1)::INT)</code> is cheap and exact.</li>
+<li><strong>Small outputs.</strong> Tool choice is a short JSON object (80 tokens at most), SQL is capped at 220 tokens and answers at 200. Small models are fast when they write little.</li>
+<li><strong>Deterministic first.</strong> Anything a keyword router can do correctly, it does for free. The model is reserved for language: understanding unusual questions and writing the answer.</li>
+</ul>
+</section>
+<section id="suggestions-that-do-not-always-pick-the-favorite" class="level3">
+<h3 class="anchored" data-anchor-id="suggestions-that-do-not-always-pick-the-favorite">Suggestions that do not always pick the favorite</h3>
+<p>The original app had a feature I wanted to keep: ask for a bet suggestion and it would pick a horse at random in proportion to the AI’s win probabilities, then make the case for it. That way the suggestions follow the model without naming the same horse every time.</p>
+<p>Lynk Lab keeps that logic and tempers it (probabilities are raised to the power 0.8 before sampling), so a longshot the model likes has a real chance to come up. For the chosen horse it pulls three facts at random from a pool (value against the morning line, recent speed figures, graded stakes wins, the jockey’s and trainer’s recent win rates), and recommends a bet type by price, following the original rules: a win bet and a key on top of exactas for horses at 10-1 or shorter, win and place with exacta and trifecta boxes for the middle of the pack, and place, show and underneath spots in trifectas and superfectas for longshots. Each suggestion says how likely that horse was to be picked. The question chips rotate too, filling their templates with different horses, jockeys and trainers after every answer.</p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>On the questions I tested, every Tier 0 answer matched the chart data exactly, for example:</p>
+<ul>
+<li><strong>Sovereignty:</strong> five starts, two wins (the Street Sense and the Fountain of Youth) and second in the Florida Derby, with a best speed figure of 94.</li>
+<li><strong>Bob Baffert:</strong> 13 Derby starters since 2012 and four first-place finishes in the race-day charts. One of those, Medina Spirit in 2021, was later disqualified, and Mandaloun was declared the winner.</li>
+<li><strong>Flavien Prat:</strong> wins with 37.7% of his rides as the betting favorite, while a $2 win bet on those rides returned -14.2%.</li>
+<li><strong>Bill Mott:</strong> 124 wins from 844 starters at Churchill Downs.</li>
+</ul>
+<p>Three consecutive bet suggestions picked Sovereignty, Final Gambit and Baeza, each with different supporting facts.</p>
+<div class="verdict">
+<p><strong>Verdict:</strong> moving the database and the model into the browser removed the server, the login and the per-question cost, and routing questions through tested SQL tools before the model cut the typical question from about 44,000 tokens to a few hundred without giving up accuracy.</p>
+</div>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<ul>
+<li><p><strong>A database bug I had to work around.</strong> While testing a named question (“how has Sovereignty run on wet tracks?”) I found that the DuckDB-WASM build I started on (1.29.0) silently dropped a <code>horse = 'Sovereignty'</code> filter when it was combined with a <code>horse IN (subquery)</code> filter, returning all 17 horses. Newer releases fix it, so the page now pins 1.32.0, and the tools and the data dictionary avoid that pattern entirely. The lesson is the same one as everywhere else in this project: check the numbers, not just the code.</p></li>
+<li><p><strong>It needs WebGPU for the AI.</strong> Chrome or Edge on a desktop with a recent graphics card runs the model well. Other browsers still get every built-in question with tables and written summaries, but not open-ended questions.</p></li>
+<li><p><strong>Small models are small.</strong> A 1.5 billion parameter model writes good SQL for clear questions and occasionally misreads an ambiguous one. The validation and retry loop catches errors that DuckDB rejects, but not a valid query that answers a slightly different question. Showing the SQL behind every answer keeps that visible.</p></li>
+<li><p><strong>Charts are race-day records.</strong> Results reflect the official order when the chart was published, so later rulings (such as the 2021 Medina Spirit disqualification) are not applied.</p></li>
+<li><p><strong>Two horses have no past performances.</strong> Luxor Cafe and Admire Daytona raced in Japan before the Derby, and the chart data only covers North American racing.</p></li>
+<li><p><strong>One race.</strong> The demo covers the 2025 Kentucky Derby. The architecture does not change for a full card or a full season. Only the data files grow.</p></li>
+</ul>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s next</h2>
+<ol type="1">
+<li>A full race day, with a race picker, using the same tools.</li>
+<li>Live Lynk model predictions for upcoming races.</li>
+<li>Saved analyses, so a user can return to the questions they asked.</li>
+</ol>
+<p>What I like most about this version is that the expensive parts of the original (the servers, the database bill, the hosted model) turned out to be optional. A horseplayer with a laptop can now run a racing analyst that knows a quarter of a million races, and it costs nothing to ask it a question.</p>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<p>The data is from the Daily Racing Form result charts <span class="citation" data-cites="drfcharts">(<a href="#ref-drfcharts" role="doc-biblioref">Daily Racing Form, n.d.</a>)</span>. The AI predictions come from the model described in <a href="../reports/fundamental-model.html">Handicapping Without the Tote</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-drfcharts" class="csl-entry" role="listitem">
+Daily Racing Form. n.d. <em>Text Chart Descriptions and Chart Field Definitions</em>. <a href="https://www1.drf.com/misc/charts/textchartsdescriptions.pdf" class="uri">Https://www1.drf.com/misc/charts/textchartsdescriptions.pdf</a> and <a href="https://www1.drf.com/misc/charts/drfchartfields.pdf" class="uri">https://www1.drf.com/misc/charts/drfchartfields.pdf</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/cbhuston\.github\.io\/lynk\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Cooper Huston</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
