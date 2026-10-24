@@ -1,7 +1,7 @@
 """
 The column contract for horse racing frames.
 
-Lynk works on one row per starter (horse in a race). Map your data source (DRF charts, Equibase, a tote feed) onto
+Lynk works on one row per starter (horse in a race). Map your data source onto
 these names once, and every feature, model and bet function in ``lynk.horse_racing`` works on it.
 """
 

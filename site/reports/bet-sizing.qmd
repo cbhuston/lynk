@@ -129,7 +129,7 @@ Pari-mutuel odds keep moving until betting closes, and the payout is set by the 
 
 ![In the synthetic racing circuit, horses that went on to win gained money share after the decision snapshot, while the field as a whole did not.](../figures/conditional_payout.png){#fig-late}
 
-In the Lynk synthetic circuit, winners' final money share rose about 4% after the decision time while the average horse's did not move, so a winner paid about 4% less than the screen promised. In real pools I found the same pattern, large enough to turn apparent edges into losses. So the expected value of a win bet has to be priced as
+In the Lynk synthetic circuit, winners' final money share rose about 4% after the decision time while the average horse's did not move, so a winner paid about 4% less than the screen promised. My late-money simulator is built around exactly this effect, and ignoring it is enough to turn apparent edges into losses. So the expected value of a win bet has to be priced as
 
 $$
 \text{EV} = p \cdot \mathbb{E}[\text{payout} \mid \text{horse wins}] - 1,
@@ -137,8 +137,8 @@ $$
 
 using a model of the final pool, conditional on the horse winning, not the current odds. Two lessons from building this:
 
-- **A late-money model is part of the probability model.** Forecasting how much money will arrive on each horse after the bet is a model in its own right, trained on past races where the final odds are known.
-- **Price consistently.** If the probability model uses a late-money forecast, the payout must use the same forecast. When I upgraded the late-money model for probabilities but kept the old one for payouts, the strategy got worse at every setting. Making them consistent fixed it.
+- **A late-money simulator is part of the probability model.** Forecasting where each horse's price will close after the bet is placed is a model in its own right, and I built one for exactly that job.
+- **Price consistently.** If the probability model uses the late-money simulator, the payout must use the same simulator. When I upgraded the simulator for probabilities but kept the old version for payouts, the strategy got worse at every setting. Making them consistent fixed it.
 
 ## Step 6: The portfolio solver
 
@@ -212,7 +212,7 @@ Sizing rules have settings (an edge cutoff, a Kelly fraction), and choosing them
 2. Add multi-race pools (daily double, Pick 3) to the portfolio solver with the same calibration gate.
 3. Extend the same solver to fixed-odds sports markets, where the impact term disappears but the correlation structure gets richer.
 
-The math in this paper fits on a few pages, and it is all implemented, tested and documented in the [Lynk framework](lynk-framework.qmd). I hope it saves the next person the day I spent watching a solver stop at its starting point.
+The math in this paper fits on a few pages, and it is all implemented, tested and documented in the [Lynk framework](../code/lynk-framework.qmd). I hope it saves the next person the day I spent watching a solver stop at its starting point.
 
 ## Reproducing this paper {.unnumbered}
 

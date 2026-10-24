@@ -9,11 +9,11 @@ abstract: |
 
 ## Problem
 
-The research behind the [fundamental model](fundamental-model.qmd) and [bet sizing](bet-sizing.qmd) papers produced more than 80 scripts. They worked, but they were written for one dataset, one machine and one question at a time. Specifically, three things made them hard to reuse:
+The research behind the [fundamental model](../reports/fundamental-model.qmd) and [bet sizing](../reports/bet-sizing.qmd) papers produced more than 80 scripts. They worked, but they were written for one dataset, one machine and one question at a time. Specifically, three things made them hard to reuse:
 
-- **The good ideas were buried in the specific code.** The pari-mutuel solver, the leakage rules and the rating system each lived inside a script that also parsed a particular tote feed.
+- **The good ideas were buried in the specific code.** The pari-mutuel solver, the leakage rules and the rating system each lived inside a script that was also tied to one particular data source.
 - **The safeguards were habits, not code.** Date splits, lagged features and pre-registered strategy selection were things I remembered to do, which means they were things someone else could forget.
-- **Nothing ran without licensed data.** DRF charts and tote feeds cannot be redistributed, so nobody else could run any of it.
+- **Nothing ran without proprietary data.** The racing data behind the research is licensed and cannot be redistributed, so nobody else could run any of it.
 
 **Problem statement:** turn the research into a framework that someone else can install, understand and extend to a new market in an afternoon, with the safeguards built into the functions rather than left to discipline.
 
@@ -26,7 +26,7 @@ I designed Lynk around six principles, each one a lesson from the research.
 3. **The market is a baseline, not a feature.** Models accept a baseline log-probability (for example the crowd's odds) as a starting score and learn corrections to it, which is how the strongest models in the research were built [@benter1994].
 4. **Prediction, pricing and sizing are separate layers.** A model produces probabilities. A market module turns them into prices (payouts, takeout, own-money impact, breakage). The sizing layer decides stakes. Swapping one layer does not touch the others.
 5. **Honest evaluation is a function call.** Results come with day-block bootstrap intervals, returns before and after rebates, drawdown, and a pre-registered selection rule, because those are what keep a backtest from lying.
-6. **Every example runs without licensed data.** A seeded synthetic racing circuit has the same structure and the same traps as real racing, including a crowd that misprices some trainers and smart late money.
+6. **Every example runs without proprietary data.** A seeded synthetic racing circuit has the same structure and the same traps as real racing, including a crowd that misprices some trainers and smart late money.
 
 The analogy that comes to mind is a full stack application. The core is the backend: it does not care what the market is. Each market module is a frontend that maps its own data and bet types onto that backend. Horse racing is the first frontend, and the next ones should only need a schema, a few features and their own bet types.
 
@@ -141,19 +141,19 @@ The core never imports a market module, so a new market is a new folder next to 
 1. **Write a schema** that maps the market's data onto events, outcomes, dates and a market snapshot.
 2. **Build features** with the same rule: history only looks backwards. The core's `validation.assert_features_precede` can guard the pipeline.
 3. **Describe the bet types as pools or fixed-odds bets.** Fixed-odds markets use `kelly_mutually_exclusive` or `kelly_scenarios` directly. Pari-mutuel markets describe each pool with `Pool` and each result with `Scenario`, and the portfolio solver does the rest.
-4. **Add a synthetic generator** so examples and tests run without licensed data.
+4. **Add a synthetic generator** so examples and tests run without proprietary data.
 
 ## Limitations
 
 - **This is version 0.1.** The core is tested, but the horse racing module is a clean re-implementation of research code, not a production betting system.
-- **No data connectors.** DRF charts and tote feeds are licensed, so the repository ships the schema and a synthetic circuit instead of parsers.
-- **The late-money forecast is deliberately simple.** The research used a learned model of late money. The framework ships a transparent default and leaves the learned version as the plug-in point it should be.
+- **No data connectors.** Racing data is licensed, so the repository ships the schema and a synthetic circuit instead of parsers.
+- **The late-money forecast is deliberately simple.** My research stack has a learned late-money simulator that forecasts where each horse's price will close. The framework ships a transparent default and leaves the simulator as the plug-in point it should be.
 - **No live execution.** Placing bets, rate limits and track cutoffs for automated bettors are outside the scope of the package.
 - **Nothing here is betting advice.** A positive backtest with an interval that includes zero is not proven, and the framework is built to say so.
 
 ## What's next
 
-1. A learned late-money model and conditional payout model as first-class plug-ins.
+1. The late-money simulator and conditional payout model as first-class plug-ins.
 2. Multi-race pools (daily double, Pick 3) in the portfolio solver.
 3. A second market module, starting with fixed-odds sports exchanges, to prove the core is truly market-agnostic.
 4. API reference pages generated from the docstrings.

@@ -5,13 +5,13 @@ Lynk is a Python framework for quantitative wagering. It takes the most reusable
 - **Probabilities that respect the event.** Group softmax (conditional logit) models where the outcomes of a race, match or election always sum to one, including a LightGBM objective that can start from the market's odds and learn corrections.
 - **Bet sizing from Kelly to a portfolio solver.** Single, fractional, mutually exclusive, scenario and risk-constrained Kelly, plus a concave solver that sizes bets across several pari-mutuel pools while accounting for how your own money moves each price.
 - **Leakage-safe validation and honest backtests.** Date splits, walk-forward windows, an assertion that fails when a feature arrives after the decision time, pre-registered strategy selection and results with day-block bootstrap confidence intervals.
-- **A horse racing module** with handicapping features, discounted Harville finish-order models, win / place / show / exacta bets and a synthetic racing circuit, so every example runs without licensed data.
+- **A horse racing module** with handicapping features, discounted Harville finish-order models, win / place / show / exacta bets and a synthetic racing circuit, so every example runs without any proprietary data.
 
 The research write-ups live at **[cbhuston.github.io/lynk](https://cbhuston.github.io/lynk/)**:
 
 1. [Handicapping Without the Tote](https://cbhuston.github.io/lynk/reports/fundamental-model.html): what drives a fundamental horse racing model.
 2. [Sizing the Bet](https://cbhuston.github.io/lynk/reports/bet-sizing.html): from the Kelly criterion to a pari-mutuel portfolio solver.
-3. [The Lynk Framework](https://cbhuston.github.io/lynk/reports/lynk-framework.html): design, architecture and a walkthrough of this package.
+3. [The Lynk Framework](https://cbhuston.github.io/lynk/code/lynk-framework.html): design, architecture and a walkthrough of this package.
 
 ## Install
 
@@ -62,7 +62,7 @@ pytest
 
 ## Scope
 
-Lynk ships no proprietary data. DRF charts and tote feeds are licensed, so the horse racing module defines a column schema and includes a synthetic circuit instead of data parsers. Nothing in this repository is betting advice: a backtest whose confidence interval includes zero is not proven, and the framework is built to say so.
+Lynk ships no proprietary data. Racing data is licensed, so the horse racing module defines a column schema and includes a synthetic circuit instead of data parsers. Nothing in this repository is betting advice: a backtest whose confidence interval includes zero is not proven, and the framework is built to say so.
 
 ## License
 

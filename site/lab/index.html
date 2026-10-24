@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lynk Lab · 2025 Kentucky Derby</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <div class="eyebrow">Lynk Lab · AI racing analyst</div>
+      <h1>2025 Kentucky Derby</h1>
+      <div class="facts" id="facts">Loading race…</div>
+    </div>
+    <div class="status">
+      <div id="db-status" class="pill">Loading data…</div>
+      <div id="llm-status" class="pill muted">AI model not loaded</div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card field-card">
+      <div class="card-head">
+        <h2>The field</h2>
+        <label class="toggle"><input type="checkbox" id="reveal"> Show result</label>
+      </div>
+      <div class="table-wrap"><table id="field"></table></div>
+      <p class="note">AI win probability comes from the Lynk fundamental model (no betting odds used), made before the race. Click a horse for its past performances.</p>
+    </section>
+
+    <section class="card chat-card">
+      <div class="card-head">
+        <h2>Ask the analyst</h2>
+        <div class="model-pick">
+          <select id="model-select" title="In-browser model">
+            <option value="fast">Fast model (~1 GB)</option>
+            <option value="smart">Smart model (~2 GB)</option>
+          </select>
+          <button id="load-llm" class="btn">Load AI</button>
+        </div>
+      </div>
+      <div id="load-bar" class="load-bar hidden"><div id="load-fill"></div><span id="load-text"></span></div>
+      <div id="messages" class="messages"></div>
+      <div id="chips" class="chips"></div>
+      <form id="ask" class="ask">
+        <input id="question" autocomplete="off" placeholder="Ask about any horse, jockey, trainer or Derby history…">
+        <button class="btn primary" type="submit">Ask</button>
+      </form>
+      <div id="meter" class="meter">Tokens used this session: 0</div>
+    </section>
+  </main>
+
+  <div id="drawer" class="drawer hidden">
+    <div class="drawer-inner">
+      <button id="close-drawer" class="close" aria-label="Close">×</button>
+      <div id="drawer-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

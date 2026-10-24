@@ -1,7 +1,7 @@
 """
 A synthetic racing world for examples, tests and teaching.
 
-Real racing data (charts, tote feeds) is licensed and cannot ship with the repo, so this module simulates a racing
+Real racing data is licensed and cannot ship with the repo, so this module simulates a racing
 circuit with the same structure and the same traps:
 
 - Horses have a latent ability that drifts over time; trainers and jockeys add their own effects.

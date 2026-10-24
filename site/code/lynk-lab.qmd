@@ -1,0 +1,144 @@
+---
+title: "Lynk Lab"
+subtitle: "An AI racing analyst for the 2025 Kentucky Derby that runs entirely in your browser"
+author: "Cooper Huston"
+date: "2026-10-24"
+toc: true
+---
+
+```{=html}
+<p><a class="btn btn-primary" href="../lab/index.html" target="_blank">Open Lynk Lab full screen</a></p>
+<iframe src="../lab/index.html" style="width:100%; height:880px; border:1px solid #e7e6e1; border-radius:10px;" title="Lynk Lab demo" loading="lazy"></iframe>
+```
+
+## Problem
+
+Lynk Lab started as a product at Lynk: a web app where a horseplayer could open a race, click on any horse, jockey or trainer, and ask questions in plain English. Behind it sat a cloud database with every race since 2012, a set of stored procedures and a chain of hosted language model calls that turned questions into SQL and SQL results into answers.
+
+It worked, and it was accurate. However, it was expensive to run and impossible to share. Every question went through a login, a cloud function, a hosted model and a database, and the 2025 Kentucky Derby version sent roughly 175,000 characters of statistics (about 44,000 tokens) to the model with every single question before deciding whether it needed to query the database at all.
+
+**Problem statement:** rebuild Lynk Lab so anyone can use it on a static web page, with no server, no login and no API key, while keeping the accuracy of the original and making each question cost a small fraction of the tokens.
+
+## Data
+
+**Source:** the Daily Racing Form result charts behind the rest of my research, for one race: the 2025 Kentucky Derby at Churchill Downs (May 3, 2025, 1 1/4 miles on a sloppy track, $5,000,000, Grade 1).
+
+The demo ships six small tables, about 10 MB in total:
+
+| Table | Rows | What it holds |
+|---|---|---|
+| `field` | 21 | Every entry, including the two scratches: post position, starting gate, pedigree, owner, breeder, jockey, trainer, morning line, final odds, finish, running positions, speed figure, trip comment, payoffs and the AI win probability |
+| `past_performances` | 114 | Every earlier start of the Derby horses, with the race name, grade, conditions, finish, figure, odds, jockey, trip comment and who won the race |
+| `starts` | 273,455 | Every start since 2012 by the Derby horses, jockeys and trainers, through the day before the Derby, with odds and payoffs so return on investment can be computed |
+| `derby_history` | 247 | Every Kentucky Derby runner from 2012 to 2024 |
+| `race` and `exotic_payoffs` | 1 and 32 | The race itself and its official exotic payoffs |
+
+: The Lynk Lab dataset. {#tbl-lab-data}
+
+For reference, the `starts` table alone is more than a quarter of a million rides and saddlings, so a question like "what does a $2 win bet on every Irad Ortiz Jr. ride for Steve Asmussen return?" is answered from 366 real races, not from a summary.
+
+**The AI predictions** are the Lynk fundamental model's win probabilities for this race, described in [Handicapping Without the Tote](../reports/fundamental-model.qmd). The model uses no betting odds and was trained only on races before 2025, so its view of the Derby is a genuine pre-race opinion. It liked Journalism most (16.3%) and had the eventual winner, Sovereignty, fourth at 8.4%.
+
+## Approach
+
+### Everything runs in the browser
+
+The analogy that comes to mind is moving a full stack application into the client. The two server pieces of the original app each have a browser equivalent:
+
+- **The database becomes DuckDB-WASM.** DuckDB is an analytical SQL engine, and its WebAssembly build runs inside the page. The tables above are downloaded once as Parquet files and every query, from a simple lookup to window functions over 273,455 rows, runs locally in milliseconds.
+- **The hosted model becomes WebLLM.** WebLLM runs a small open model (Qwen 2.5 with 1.5 or 3 billion parameters) on the visitor's own graphics card through WebGPU. The first load downloads 1 to 2 GB of model weights into the browser's cache. After that it starts in seconds and nothing leaves the machine.
+
+There is no API key anywhere in the page, and nobody pays per question.
+
+### Three tiers: spend tokens only when they buy something
+
+The original app sent everything to the model and let it figure out what to do. Lynk Lab does the reverse: it tries the cheapest correct path first and only involves the model when it adds value.
+
+```{mermaid}
+flowchart LR
+  Q[Question] --> R{Tier 0 keyword router}
+  R -- matches a tool --> T[Tested SQL tool]
+  R -- no match --> L1{Tier 1 model picks a tool}
+  L1 -- tool --> T
+  L1 -- no tool fits --> L2[Tier 2 model writes SQL]
+  L2 --> V[Validate: read-only, one SELECT, LIMIT 100]
+  V -- error --> L2
+  V --> D[(DuckDB in the browser)]
+  T --> D
+  D --> A[Model writes the answer from the returned rows only]
+```
+
+1. **Tier 0, the router (zero tokens).** Most questions people ask about a race are predictable: tell me about this horse, compare two horses, how does this jockey do in Grade 1 races, who has early speed, who changed riders. A keyword router recognizes these, resolves the horse, jockey and trainer names, and sends them straight to one of 14 tested SQL tools. The tools are ported from the original Lynk Lab queries (past performances, jockey and trainer records, the last-30-starts ROI, first-time riders, past Derby results) plus new ones such as the pace map and the AI value table.
+2. **Tier 1, tool choice.** When the router does not recognize a question, the model sees a one-line description of each tool and the names in the race, and replies with a tiny JSON object naming the tool and its arguments.
+3. **Tier 2, text to SQL.** When no tool fits ("which Derby trainers have won the most graded stakes since 2023?"), the model writes a SQL query from a verbose data dictionary: every column with its type, a plain-English description, its units and its real allowed values (the actual track conditions, race types, grades and track codes are read from the data when the page loads). It also gets five worked examples, including one that shows how to decline a question. The query is checked before it runs: one statement, read-only, no setting changes, wrapped in a 100-row limit. If DuckDB rejects it, the error goes back to the model for one retry, the same rewrite loop the original cloud function used.
+
+**When the data cannot answer, it says so.** The dictionary ends with an explicit list of what the data does not contain (workouts, veterinary records, results after the Derby, races outside North America and so on). If a question needs any of it, the model must reply `NO_DATA` with a reason instead of writing SQL, and the app tells the user plainly that it cannot answer. A query that comes back empty gets the same honest message instead of a guess, and the model that writes the final answer is told exactly what the rows represent, so it cannot describe a table of all-surface speed figures as "muddy track" results.
+
+In every case the final answer is written by the model from **only the rows the query returned**, capped at 15 rows and 12 columns. The model never does arithmetic. Win percentages, returns on investment and averages are computed by SQL, which is why the answers stay as accurate as the original's.
+
+### Why it uses so few tokens
+
+| Step | What the model sees | Approximate prompt size |
+|---|---|---|
+| Original Derby app, every question | All horse, jockey, trainer and Derby statistics as text | ~174,500 characters, ~44,000 tokens |
+| Tier 0 router | Nothing | 0 tokens |
+| Tier 1 tool choice | 14 one-line tool descriptions + the names in the race | ~2,100 characters, ~550 tokens |
+| Tier 2 text to SQL | Verbose dictionary for only the tables the question needs + real column values + names + 5 examples | ~6,700 characters, ~1,700 tokens (up to ~9,700 / ~2,500 with every table) |
+| Answer | The question + at most 15 result rows | ~1,500 characters, ~400 tokens |
+
+: Prompt sizes per step. The app shows the exact token count under every answer. {#tbl-tokens}
+
+A typical question takes the Tier 0 path and about 400 to 600 tokens in total. The most expensive path (tool choice, SQL with the full dictionary, a retry and the answer) is around 6,000 tokens. In other words, the hardest question in Lynk Lab costs about a seventh of what the easiest question cost in the original, and it runs for free on the visitor's own hardware.
+
+Four design choices make that possible:
+
+- **A verbose dictionary, but only where it is needed.** The model gets a detailed description of the tables, not their contents, and only for the tables a question touches: a jockey question sends the `starts` and `field` descriptions, a question about a horse's form sends `past_performances`. Detail is what makes small models write correct SQL, and selecting tables is what keeps that detail affordable. A dictionary costs the same no matter how many rows sit behind it, so the dataset can grow from one race to every race without the prompt growing.
+- **The database does the math.** Asking a language model to compute a win percentage from 10,000 rides is slow, expensive and error-prone. Asking it to write `avg((finish = 1)::INT)` is cheap and exact.
+- **Small outputs.** Tool choice is a short JSON object (80 tokens at most), SQL is capped at 220 tokens and answers at 200. Small models are fast when they write little.
+- **Deterministic first.** Anything a keyword router can do correctly, it does for free. The model is reserved for language: understanding unusual questions and writing the answer.
+
+### Suggestions that do not always pick the favorite
+
+The original app had a feature I wanted to keep: ask for a bet suggestion and it would pick a horse at random in proportion to the AI's win probabilities, then make the case for it. That way the suggestions follow the model without naming the same horse every time.
+
+Lynk Lab keeps that logic and tempers it (probabilities are raised to the power 0.8 before sampling), so a longshot the model likes has a real chance to come up. For the chosen horse it pulls three facts at random from a pool (value against the morning line, recent speed figures, graded stakes wins, the jockey's and trainer's recent win rates), and recommends a bet type by price, following the original rules: a win bet and a key on top of exactas for horses at 10-1 or shorter, win and place with exacta and trifecta boxes for the middle of the pack, and place, show and underneath spots in trifectas and superfectas for longshots. Each suggestion says how likely that horse was to be picked. The question chips rotate too, filling their templates with different horses, jockeys and trainers after every answer.
+
+## Results
+
+On the questions I tested, every Tier 0 answer matched the chart data exactly, for example:
+
+- **Sovereignty:** five starts, two wins (the Street Sense and the Fountain of Youth) and second in the Florida Derby, with a best speed figure of 94.
+- **Bob Baffert:** 13 Derby starters since 2012 and four first-place finishes in the race-day charts. One of those, Medina Spirit in 2021, was later disqualified, and Mandaloun was declared the winner.
+- **Flavien Prat:** wins with 37.7% of his rides as the betting favorite, while a $2 win bet on those rides returned -14.2%.
+- **Bill Mott:** 124 wins from 844 starters at Churchill Downs.
+
+Three consecutive bet suggestions picked Sovereignty, Final Gambit and Baeza, each with different supporting facts.
+
+::: {.verdict}
+**Verdict:** moving the database and the model into the browser removed the server, the login and the per-question cost, and routing questions through tested SQL tools before the model cut the typical question from about 44,000 tokens to a few hundred without giving up accuracy.
+:::
+
+## Limitations
+
+- **A database bug I had to work around.** While testing a named question ("how has Sovereignty run on wet tracks?") I found that the DuckDB-WASM build I started on (1.29.0) silently dropped a `horse = 'Sovereignty'` filter when it was combined with a `horse IN (subquery)` filter, returning all 17 horses. Newer releases fix it, so the page now pins 1.32.0, and the tools and the data dictionary avoid that pattern entirely. The lesson is the same one as everywhere else in this project: check the numbers, not just the code.
+
+- **It needs WebGPU for the AI.** Chrome or Edge on a desktop with a recent graphics card runs the model well. Other browsers still get every built-in question with tables and written summaries, but not open-ended questions.
+- **Small models are small.** A 1.5 billion parameter model writes good SQL for clear questions and occasionally misreads an ambiguous one. The validation and retry loop catches errors that DuckDB rejects, but not a valid query that answers a slightly different question. Showing the SQL behind every answer keeps that visible.
+- **Charts are race-day records.** Results reflect the official order when the chart was published, so later rulings (such as the 2021 Medina Spirit disqualification) are not applied.
+- **Two horses have no past performances.** Luxor Cafe and Admire Daytona raced in Japan before the Derby, and the chart data only covers North American racing.
+- **One race.** The demo covers the 2025 Kentucky Derby. The architecture does not change for a full card or a full season. Only the data files grow.
+
+## What's next
+
+1. A full race day, with a race picker, using the same tools.
+2. Live Lynk model predictions for upcoming races.
+3. Saved analyses, so a user can return to the questions they asked.
+
+What I like most about this version is that the expensive parts of the original (the servers, the database bill, the hosted model) turned out to be optional. A horseplayer with a laptop can now run a racing analyst that knows a quarter of a million races, and it costs nothing to ask it a question.
+
+## References {.unnumbered}
+
+The data is from the Daily Racing Form result charts [@drfcharts]. The AI predictions come from the model described in [Handicapping Without the Tote](../reports/fundamental-model.qmd).
+
+::: {#refs}
+:::

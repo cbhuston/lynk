@@ -162,7 +162,7 @@ The most interesting finding was about time. I let every rating drift, so a trai
 1. Within-race ranks of the entity ratings, to remove the early-year drift.
 2. Workouts and structured trip information as new pre-race inputs.
 3. A neural network trained on the ratings directly, instead of blending them in afterwards.
-4. Porting the feature pipeline into the open [Lynk framework](lynk-framework.qmd), so anyone can run the same leakage-safe workflow on their own data.
+4. Porting the feature pipeline into the open [Lynk framework](../code/lynk-framework.qmd), so anyone can run the same leakage-safe workflow on their own data.
 
 I think the biggest takeaway is how far honest testing gets you. Every gain on this page held up on years the model had never seen, and that is the only kind of gain worth building on.
 

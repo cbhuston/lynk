@@ -26,7 +26,7 @@ def forecast_final_money(win_money, win_pool, late_money_share=0.4, smart_share=
 
     The simplest forecast scales today's money up by the expected late-money share. If a model probability is given,
     the late money is split between the crowd's current view and the model's view (``smart_share`` of it follows the
-    model). In the research this step is a learned late-money model; this function is the transparent default.
+    model). In the research this step is a learned late-money simulator; this function is the transparent default.
 
     Returns:
     - Tuple (final_money_per_horse, final_pool).

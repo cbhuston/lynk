@@ -1,32 +1,60 @@
 ---
-title: "Lynk Research"
-subtitle: "Quantitative wagering, built in the open"
+title: "Cooper Huston"
+subtitle: "I build technology for the capital markets, from trading tools to production AI, and I research quantitative wagering on the side."
 toc: false
 ---
 
-I build quantitative tools for betting markets, and this site is where I write up what I have learned. The work started with a simple question: can a model built from the past performances in the racing charts price a horse race well enough to bet on it? Answering that honestly took a full rebuild of how I test models, how I size bets and how I organize the code.
+## About me
 
-These three papers are the result. Each one follows the same structure I use for every project: the problem, the approach, the data, the results, what the work does not do yet and where it goes next.
+I am the Director of IT at R. Seelaus & Co., a broker-dealer and asset manager in Chatham, New Jersey, where I lead the firm's technology and work directly with the trading desks. My background is the combination I chose in college and have kept ever since: computer science and public policy. I like problems where the engineering has to be right and the outcome has to matter to the people using it, and markets are full of those.
+
+The analogy that comes to mind for how I work is a full stack developer for a trading floor. On a given week I might be building a pricing model, wiring an order router into the desk's workflow, standing up the cloud infrastructure underneath it and sitting with a trader to figure out what the tool should actually do.
+
+## Career
+
+**R. Seelaus & Co., Director of IT (March 2025 to present).** I run the firm's technology function and set its AI strategy. Specifically:
+
+- I built an agentic research platform for institutional agency credit research, where an LLM agent uses tools over proprietary and market data to answer research questions, and it has picked up significant client usage.
+- I deployed LLM agents that automate the RFP (request for proposal) workflow across the broker-dealer and asset management businesses, cutting turnaround about 70%. For reference, a response that used to take a full week now takes about two days.
+- I built a client analytics platform for the commercial paper desk, an agency order routing and execution engine that grew the desk's order flow 50%, a systematic municipal bond market-making and pricing tool, and real-time risk and capital monitoring for the desks and leadership.
+- I stood up the serverless Google Cloud infrastructure, monitoring and CI/CD that all of the firm's internal applications run on, along with the retrieval, evaluation and guardrail tooling that keeps the AI systems reliable and compliant.
+
+**Piper Sandler, Software Engineering Consultant (July 2021 to August 2024).** I worked with the municipal bond algorithmic trading desk, where I re-engineered the desk's production pricing engine in .NET. Better prices drove a 200% increase in quarterly trading turnover, which means the desk tripled the business flowing through the engine. I also maintained the FIX protocol platform that monitors all external order flow across more than five counterparty connections, and built a deal pipeline tool that doubled new lead capture for the firm's top-ranked municipal finance team.
+
+**Lynk Group, Founder (December 2020 to January 2025).** I founded Lynk to apply quantitative methods to pari-mutuel wagering and led a team of five. We built the data pipelines, models, a low-latency C#/.NET wagering system that ran at 99.9% uptime for more than a year, and an LLM that let users query a decade of racing data in plain English.
+
+**Education.** University of Denver, B.A. in Computer Science with Distinction and Public Policy (2021), University Honors Program.
+
+**Outside of work.** I spent a semester with NOLS on an 80-day, 500-mile expedition in Baja, Mexico, backpacking, sea kayaking and sailing, and my peers picked me to lead a five-day kayaking expedition around Isla San Jose. These days it is skiing, cooking and music whenever I can.
+
+## Passion project: quantitative wagering
+
+Lynk started as a company and is now the project I keep coming back to. Horse racing is one of the best laboratories I know for quantitative finance. Every price is public, every result is final, the fees are posted, and the market is pari-mutuel, meaning everyone bets against each other in a shared pool while the track takes a cut. That makes it a clean place to ask the hard questions: is the crowd's price efficient, where is it wrong, and how much can you bet before your own money moves the price against you?
+
+The research below covers 648,670 races from 2012 to 2025, which is roughly 130 races a day, every day, for fourteen years. Each paper follows the same structure I use for every project: the problem, the data, the approach, the results, what the work does not do yet and where it goes next.
 
 ::: {.card-grid}
 
 ::: {.card}
-### [1. Handicapping Without the Tote](reports/fundamental-model.qmd)
-What actually predicts a horse race when you are not allowed to look at the betting odds. Feature families, walk-forward results from 2019 to 2025, a neural network that looks at the whole field at once and online ratings for trainers, jockeys and sires.
+### [Handicapping Without the Tote](reports/fundamental-model.qmd)
+What actually predicts a horse race when you are not allowed to look at the betting odds: feature families, walk-forward results from 2019 to 2025, a neural network that reads the whole field and online ratings for trainers, jockeys and sires.
 :::
 
 ::: {.card}
-### [2. Sizing the Bet](reports/bet-sizing.qmd)
-From the one-line Kelly formula to a nonlinear solver that sizes bets across win, place, show and exacta pools while accounting for the fact that my own money moves the price.
+### [One Race, One Winner](reports/multiclass.qmd)
+Why framing the problem as "which horse in this race wins" instead of "does this horse win" was one of the most valuable decisions in the whole project, tested head to head on the same data.
 :::
 
 ::: {.card}
-### [3. The Lynk Framework](reports/lynk-framework.qmd)
+### [Sizing the Bet](reports/bet-sizing.qmd)
+From the one-line Kelly formula to a nonlinear solver that sizes bets across win, place, show and exacta pools while accounting for how my own money moves the price.
+:::
+
+::: {.card}
+### [Lynk: the code](code/lynk-framework.qmd)
 The open-source Python framework that came out of this research: probabilities, Kelly sizing, pari-mutuel math, leakage-safe backtesting and a horse racing module, built so new markets can plug into the same core.
 :::
 
 :::
 
-**For reference:** the research behind these papers covers 648,670 thoroughbred races from 2012 to 2025, which is roughly 130 races a day, every day, for fourteen years. The code is at [github.com/cbhuston/lynk](https://github.com/cbhuston/lynk).
-
-**A note on scope:** these papers describe methods and the fundamental (no odds) model in full. Results that depend on licensed tote data, specific betting strategies and their returns are intentionally left out.
+**A note on scope:** these papers describe methods and the fundamental (no odds) model in full. Proprietary models, specific betting strategies and their returns are intentionally left out.
