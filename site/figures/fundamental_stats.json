@@ -1,0 +1,154 @@
+{
+ "walkforward": {
+  "v1c": {
+   "2019": 1.683,
+   "2020": 1.7445,
+   "2021": 1.689,
+   "2022": 1.6855,
+   "2023": 1.6985,
+   "2024": 1.691,
+   "2025": 1.6785
+  },
+  "v3": {
+   "2019": 1.676,
+   "2020": 1.7378,
+   "2021": 1.6821,
+   "2022": 1.6794,
+   "2023": 1.692,
+   "2024": 1.6835,
+   "2025": 1.6739
+  },
+  "v4": {
+   "2019": 1.6717,
+   "2020": 1.7348,
+   "2021": 1.6794,
+   "2022": 1.6761,
+   "2023": 1.6881,
+   "2024": 1.6803,
+   "2025": 1.6717
+  },
+  "v5": {
+   "2019": 1.663,
+   "2020": 1.7254,
+   "2021": 1.6703,
+   "2022": 1.6665,
+   "2023": 1.6793,
+   "2024": 1.6747,
+   "2025": 1.6642
+  },
+  "v6": {
+   "2019": 1.6653,
+   "2020": 1.726,
+   "2021": 1.6695,
+   "2022": 1.6663,
+   "2023": 1.678,
+   "2024": 1.6732,
+   "2025": 1.663
+  }
+ },
+ "family_gains": [
+  {
+   "family": "Race-day announcements",
+   "gain": 0.0007,
+   "lo": -0.0009,
+   "hi": 0.0023
+  },
+  {
+   "family": "Bias-adjusted last race",
+   "gain": 0.0012,
+   "lo": -0.0009,
+   "hi": 0.0031
+  },
+  {
+   "family": "Field shape (contenders, shippers)",
+   "gain": 0.0013,
+   "lo": -0.0005,
+   "hi": 0.003
+  },
+  {
+   "family": "Pedigree by surface / distance",
+   "gain": 0.0015,
+   "lo": -0.0,
+   "hi": 0.0031
+  },
+  {
+   "family": "Deeper horse history",
+   "gain": 0.0024,
+   "lo": 0.0008,
+   "hi": 0.0039
+  },
+  {
+   "family": "Within-race ranks & recency",
+   "gain": 0.0026,
+   "lo": 0.0011,
+   "hi": 0.0042
+  },
+  {
+   "family": "Connections & same-day form",
+   "gain": 0.003,
+   "lo": 0.0013,
+   "hi": 0.0047
+  },
+  {
+   "family": "Entity ratings",
+   "gain": 0.0035,
+   "lo": 0.0014,
+   "hi": 0.0055
+  },
+  {
+   "family": "Pace & classic handicapping",
+   "gain": 0.0066,
+   "lo": 0.0047,
+   "hi": 0.0087
+  },
+  {
+   "family": "Morning line (not used: odds line)",
+   "gain": 0.01,
+   "lo": 0.0075,
+   "hi": 0.0123
+  }
+ ],
+ "importance_share": {
+  "Pedigree": 0.0068,
+  "Track bias & post": 0.0292,
+  "Freshness & schedule": 0.0309,
+  "Entity ratings": 0.0559,
+  "Horse profile": 0.0593,
+  "Past odds & odds-adjusted form": 0.0785,
+  "Pace & running style": 0.0813,
+  "Finish history": 0.0845,
+  "Speed figures": 0.0995,
+  "Track, surface & distance fit": 0.1038,
+  "Connections": 0.1722,
+  "Class & earnings": 0.1979
+ },
+ "relative_share": 0.4324,
+ "n_features": 254,
+ "ratings_single": {
+  "Trainer x surface switch": -2e-05,
+  "Trainer x distance switch": 1e-05,
+  "Track x running style": 2e-05,
+  "Horse": 8e-05,
+  "Sire x debut": 0.00013,
+  "Trainer x jockey": 0.00017,
+  "Trainer x class change": 0.00018,
+  "Trainer x layoff / claim / debut": 0.00018,
+  "Trainer x jockey change": 0.0002,
+  "Owner x trainer": 0.00022,
+  "Trainer x race type": 0.00022,
+  "Owner": 0.00026,
+  "Trainer x age group": 0.0003,
+  "Trainer x days since last start": 0.00031,
+  "Trainer x price range": 0.00033,
+  "Track x post position": 0.00034,
+  "Trainer": 0.00039,
+  "Trainer x track": 0.00041,
+  "Jockey x track": 0.00051,
+  "Trainer x surface x distance": 0.00052,
+  "Jockey x running style": 0.00061,
+  "Jockey x price range": 0.00066,
+  "Jockey x surface x distance": 0.0008,
+  "Jockey": 0.00086,
+  "Sire x surface x distance": 0.00104
+ }
+}

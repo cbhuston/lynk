@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - reports/*.qmd
+
+website:
+  title: "Lynk Research"
+  description: "Quantitative wagering research by Cooper Huston: fundamental horse racing models, bet sizing and the Lynk framework."
+  site-url: "https://cbhuston.github.io/lynk/"
+  repo-url: "https://github.com/cbhuston/lynk"
+  page-navigation: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Research
+        menu:
+          - href: reports/fundamental-model.qmd
+            text: "1. Handicapping Without the Tote"
+          - href: reports/bet-sizing.qmd
+            text: "2. Sizing the Bet"
+          - href: reports/lynk-framework.qmd
+            text: "3. The Lynk Framework"
+    right:
+      - icon: github
+        href: https://github.com/cbhuston/lynk
+        aria-label: GitHub
+  page-footer:
+    left: "Cooper Huston · Lynk Research"
+    right: "Built with [Quarto](https://quarto.org)"
+
+bibliography: references.bib
+link-citations: true
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    html-math-method: mathjax
+    code-copy: true
+    code-overflow: wrap
+    fig-cap-location: bottom
+    reference-location: margin
+    citation-location: document
+    smooth-scroll: true

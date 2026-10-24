@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+site/.quarto/
+site/_freeze/
+.claude/
+.ipynb_checkpoints/
+*.parquet
+*.npy
+.env
+site/_site/

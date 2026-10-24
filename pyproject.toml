@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lynk"
+version = "0.1.0"
+description = "A quantitative wagering framework: probabilities, Kelly sizing, pari-mutuel portfolio optimization and leakage-safe backtesting, starting with horse racing."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Cooper Huston" }]
+dependencies = ["numpy>=1.22", "pandas>=1.5", "scipy>=1.9"]
+
+[project.optional-dependencies]
+models = ["lightgbm>=3.3"]
+dev = ["pytest>=7", "lightgbm>=3.3", "matplotlib>=3.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,32 @@
+---
+title: "Lynk Research"
+subtitle: "Quantitative wagering, built in the open"
+toc: false
+---
+
+I build quantitative tools for betting markets, and this site is where I write up what I have learned. The work started with a simple question: can a model built from the past performances in the racing charts price a horse race well enough to bet on it? Answering that honestly took a full rebuild of how I test models, how I size bets and how I organize the code.
+
+These three papers are the result. Each one follows the same structure I use for every project: the problem, the approach, the data, the results, what the work does not do yet and where it goes next.
+
+::: {.card-grid}
+
+::: {.card}
+### [1. Handicapping Without the Tote](reports/fundamental-model.qmd)
+What actually predicts a horse race when you are not allowed to look at the betting odds. Feature families, walk-forward results from 2019 to 2025, a neural network that looks at the whole field at once and online ratings for trainers, jockeys and sires.
+:::
+
+::: {.card}
+### [2. Sizing the Bet](reports/bet-sizing.qmd)
+From the one-line Kelly formula to a nonlinear solver that sizes bets across win, place, show and exacta pools while accounting for the fact that my own money moves the price.
+:::
+
+::: {.card}
+### [3. The Lynk Framework](reports/lynk-framework.qmd)
+The open-source Python framework that came out of this research: probabilities, Kelly sizing, pari-mutuel math, leakage-safe backtesting and a horse racing module, built so new markets can plug into the same core.
+:::
+
+:::
+
+**For reference:** the research behind these papers covers 648,670 thoroughbred races from 2012 to 2025, which is roughly 130 races a day, every day, for fourteen years. The code is at [github.com/cbhuston/lynk](https://github.com/cbhuston/lynk).
+
+**A note on scope:** these papers describe methods and the fundamental (no odds) model in full. Results that depend on licensed tote data, specific betting strategies and their returns are intentionally left out.
