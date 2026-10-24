@@ -64,6 +64,10 @@ pytest
 
 Lynk ships no proprietary data. DRF charts and tote feeds are licensed, so the horse racing module defines a column schema and includes a synthetic circuit instead of data parsers. Nothing in this repository is betting advice: a backtest whose confidence interval includes zero is not proven, and the framework is built to say so.
 
+## License
+
+MIT. See [LICENSE](LICENSE).
+
 ## Author
 
 Cooper Huston
